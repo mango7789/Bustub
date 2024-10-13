@@ -328,7 +328,12 @@ void BufferPoolManager::FlushAllPages() { UNIMPLEMENTED("TODO(P1): Add implement
  * @return std::optional<size_t> The pin count if the page exists, otherwise `std::nullopt`.
  */
 auto BufferPoolManager::GetPinCount(page_id_t page_id) -> std::optional<size_t> {
-  UNIMPLEMENTED("TODO(P1): Add implementation.");
+  auto iter = page_table_.find(page_id);
+  if (iter == page_table_.end()) {
+    return std::nullopt;
+  }
+  size_t pin_count = frames_[iter->second]->pin_count_.load();
+  return std::optional<size_t>(pin_count);
 }
 
 }  // namespace bustub
