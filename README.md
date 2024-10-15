@@ -11,3 +11,4 @@
 - Memory Management
 - Hash Tables
 - Indexes & Filters I
+- Indexes & Filters II
